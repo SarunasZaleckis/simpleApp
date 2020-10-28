@@ -1,0 +1,45 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name:  simpleapp
+  labels:
+    name:  simpleapp
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      name: simpleapp
+  template:
+    metadata:
+      labels:
+        name:  simpleapp
+    spec:
+      containers:
+      - image:  simpleapp:initial
+        name:  simpleapp
+        resources:
+          requests:
+            cpu: "20m"
+            memory: "55M"
+          limits:
+              cpu: "120m"
+              memory: "150M"
+        ports:
+        - containerPort: 8081
+          name:  simpleapp
+        volumeMounts:
+        - mountPath: /data
+          name: data
+      - image: redis:current-slim
+        name: redis
+        resources:
+          requests:
+            cpu: "20m"
+            memory: "55M"
+          limits:
+            cpu: "120m"
+            memory: "150M"
+      volumes:
+        - name: data
+          emptyDir: {}
+      restartPolicy: Always

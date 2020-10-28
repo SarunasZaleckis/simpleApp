@@ -1,0 +1,16 @@
+apiVersion: v1
+kind: PersistentVolume
+metadata:
+  name: simpleapp
+  labels:
+    type: local
+  namespace: simpleapp
+spec:
+  capacity:
+    storage: 5Gi
+  accessModes:
+  - ReadWriteOnce
+  storageClassName: local
+  hostPath:
+    path:  "/D/Volumes/redis"
+    type: Directory

@@ -1,0 +1,22 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: simpleapp
+  labels:
+    name: simpleapp
+  namespace: simpleapp
+spec:
+  volumes:
+  - name:  simpleapp
+    persistentVolumeClaim:
+      claimName: simpleapp
+  containers:
+  - name: redis
+    image: redis:current-slim
+    resources:
+      limits:
+        memory: "128Mi"
+        cpu: "500m"
+    ports:
+      - containerPort: 6379
+        name: "redis-server"

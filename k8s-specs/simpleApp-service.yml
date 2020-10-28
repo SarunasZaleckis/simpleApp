@@ -1,0 +1,15 @@
+apiVersion: v1
+kind: Service
+metadata:
+  labels:
+    app: simpleapp
+  name: simpleapp
+  namespace: simpleapp
+spec:
+  type: NodePort
+  ports:
+  - name: "simpleapp-front"
+    port: 4001
+    targetPort: 8081
+  selector:
+    app: simpleapp
